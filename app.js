@@ -5,16 +5,15 @@
   const sass = require('node-sass-middleware');
 
   var index = require('./routes/index');
+  var thankyou = require('./routes/thankyou');
 
   var app = express();
 
   // view engine setup
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 8080);
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'ejs');
 
-  // uncomment after placing your favicon in /public
-  //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
   app.use(favicon(__dirname + '/public/favicon.ico'));
   app.use(logger('dev'));
 
@@ -27,6 +26,8 @@
 
   app.use('/', index);
   app.use('/home', index);
+  app.use('/thankyou', thankyou);
+  app.use('/subscribe', thankyou);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -48,7 +49,7 @@
 
 
   app.listen(app.get('port'), function () {
-      console.log("Express server listening on port " + app.get('port'));
+      console.log("App is running on port " + app.get('port'));
   });
 
   module.exports = app;
