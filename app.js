@@ -3,12 +3,15 @@
   const favicon = require('express-favicon');
   var logger = require('morgan');
   const sass = require('node-sass-middleware');
+  var compression = require('compression')
+
 
   var index = require('./routes/index');
   var thankyou = require('./routes/thankyou');
 
   var app = express();
 
+  app.use(compression())
   // view engine setup
   app.set('port', process.env.PORT || 8080);
   app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +21,8 @@
   app.use(logger('dev'));
 
   app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public' ), { maxAge: 7199964 }));
+
 
   app.use(sass({
     src: path.join(__dirname, 'public'),
